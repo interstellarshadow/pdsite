@@ -82,16 +82,6 @@ outputfolder = config['outputfolder']
 themepath = os.path.join(themesdir, theme)
 outputfolder = os.path.realpath(outputfolder)
 
-# Build glob expressions
-extensionglob = '*' + inputext
-indexfileglob = '*index' + inputext
-
-# Define temporary file locations
-globaltree = os.path.join(outputfolder, tree.yml.tmp)
-localtree = 'localtree.yml.tmp'
-localblocktemplate = os.path.join(outputfolder, 'localtemplate.yml.tmp')
-localblock= 'local.yml.tmp'
-configblock = os.path.join(outputfolder, 'config.yml.tmp')
 
 
 
@@ -100,6 +90,23 @@ def build():
 
     if debug:
         print('Beginning build')
+
+    # Build glob expressions
+    extensionglob = '*' + inputext
+    indexfileglob = '*index' + inputext
+
+    # Define temporary file locations
+    globaltree = os.path.join(outputfolder, tree.yml.tmp)
+    localtree = 'localtree.yml.tmp'
+    localblocktemplate = os.path.join(outputfolder, 'localtemplate.yml.tmp')
+    localblock= 'local.yml.tmp'
+    configblock = os.path.join(outputfolder, 'config.yml.tmp')
+
+    if debug:
+        print('Building site...')
+
+    confblock_writer = io.open(configblock, 'w')
+
 
 def serve(port=8080, rebuild=False):
     '''Creates a webserver using the website that is in the following directory 
